@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+require('dotenv').config();
+const express = require('express'); 
+const PORT = process.env.PORT || 3000;
+const patientRoutes = require('./routes/patients');
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const app = express(); 
+app.use(express.json()); 
+app.use('/api/patients',patientRoutes);
 
-export default App;
+const db = require('./config/db');
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+module.exports = app;
