@@ -5,6 +5,7 @@ const patientRoutes = require('./routes/patients');
 
 const app = express(); 
 app.use(express.json()); 
+app.use(require('cors')());
 app.use('/api/patients',patientRoutes);
 
 const db = require('./config/db');
